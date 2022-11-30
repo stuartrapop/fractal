@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:44:48 by srapopor          #+#    #+#             */
-/*   Updated: 2022/11/23 17:03:32 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/11/30 01:57:52 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	dec_to_hex(int n, char *pair)
 
 	if (n < 0 || n > 255)
 		return ;
-
 	if (n % 16 > 9)
 		pair[1] = n % 16 + 'A';
 	else
