@@ -2,9 +2,10 @@ NAME = test
 
 SRCS_PATH =./
 
-OBJS_PATH = ./objects
+OBJS_PATH = ./
 
-SRCS_NAME = main.c
+SRCS_NAME = screen_helpers.c \
+			fractal.c
 
 
 SRCS = $(addprefix $(SRCS_PATH)/,$(SRCS_NAME))
@@ -22,7 +23,8 @@ OBJS = ${SRCS:.c=.o}
 	$(CC) -o $@ -c $<
 
 ${NAME} : ${OBJS}
-	$(CC)   -L.  -g  -lmlx -lGLEW -lglfw -framework OpenGL -framework AppKit  $(OBJS) -o ${NAME}
+	# $(CC)   -L.  -g  -lmlx -lGLEW -lglfw -framework OpenGL -framework AppKit  $(OBJS) -o ${NAME}
+	$(CC)   -L.  -g -lm -lmlx  -framework OpenGL -framework AppKit  $(OBJS) -o ${NAME}
 
 all : ${NAME}
 

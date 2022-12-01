@@ -6,15 +6,13 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:44:48 by srapopor          #+#    #+#             */
-/*   Updated: 2022/11/30 01:57:52 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/01 12:19:30 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include <stdio.h>
 #include <math.h>
-
-
 #include <mlx.h>
 
 void	dec_to_hex(int n, char *pair)

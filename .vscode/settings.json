@@ -2,6 +2,7 @@
   "files.associations": {
     "*.ejs": "plaintext",
     "mlx.h": "c",
-    "cmath": "c"
+    "cmath": "c",
+    "ios": "c"
   }
 }
