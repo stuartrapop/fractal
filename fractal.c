@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:44:06 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/01 17:10:09 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:01:05 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,21 @@ int	key_hook(int keycode, t_fractal *fractal)
 
 int	mouse_hook(int button, int x, int y, t_fractal *fractal)
 {
-	if (button == LEFTCLICK )
-		fractal->screen.scale *= 0.9;
-	if (button == RIGHTCLICK)
+	if (button == LEFTCLICK || button == SCROLL_IN)
+	{
 		fractal->screen.scale *= 1.1;
+		fractal->screen.x_offset = fractal->screen.x_offset - ( fractal->screen.width / 2 - x) * (0.9 - 1);
+		fractal->screen.y_offset = fractal->screen.y_offset - ( fractal->screen.height / 2 - y) * (0.9 - 1);
+
+	}
+	if (button == RIGHTCLICK || button == SCROLL_OUT)
+	{
+		fractal->screen.scale *= 0.9;
+		fractal->screen.x_offset = fractal->screen.x_offset - ( fractal->screen.width / 2 - x) * (1.1 - 1);
+		fractal->screen.y_offset = fractal->screen.y_offset - ( fractal->screen.height / 2 - y) * (1.1 - 1);
+	}
+	fractal->screen.mouse_x = x;
+	fractal->screen.mouse_y = y;
 	printf("mouse pressed %d %d  %d %f\n", button, x, y, fractal->screen.x_offset);
 	return (0);
 }
