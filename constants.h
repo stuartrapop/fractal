@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keycode.h                                          :+:      :+:    :+:   */
+/*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:26:15 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/01 17:05:16 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:40:07 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define SCROLL_IN 5
 # define SCROLL_OUT 4
 
-enum {
+typedef enum e_events {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_MOUSEDOWN = 4,
@@ -39,6 +39,17 @@ enum {
 	ON_MOUSEMOVE = 6,
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
-};
+} t_events;
+
+# define SCREEN_WIDTH  800
+# define SCREEN_HEIGHT  600
+# define SCREEN_NAME  "Fractal Display"
+
+# define Color1 0x003f5c
+# define Color2 0x444e86
+# define Color3 0x955196
+# define Color4 0xdd5182
+# define Color5 0xff6e54
+# define Color6 0xffa600
 
 #endif

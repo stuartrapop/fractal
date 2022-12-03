@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:23:17 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/01 17:11:10 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/03 10:04:53 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ typedef struct s_screen {
 	char		*name;
 	double		x_offset;
 	double		y_offset;
+	int			pan_start_x;
+	int			pan_start_y;
 	int			mouse_x;
 	int			mouse_y;
+	int			mouse_down;
 	double		scale;
 }	t_screen;
 
@@ -54,12 +57,27 @@ typedef struct s_fractal {
 	t_data		img;
 }	t_fractal;
 
-# define SCREEN_WIDTH  800
-# define SCREEN_HEIGHT  600
-# define SCREEN_NAME  "Fractal Display"
+typedef struct s_rgb {
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
 
-void	initialize(t_fractal *fractal);
+void
+initialize(t_fractal *fractal);
 int		round_int(double d);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		key_hook(int keycode, t_fractal *fractal);
+void	update_offset(t_screen_point s_point, t_world_point w_point,
+			t_fractal *fractal);
+int		mouse_down(int button, int x, int y, t_fractal *fractal);
+int		mouse_up(int button, int x, int y, t_fractal *fractal);
+int		mouse_move(int x, int y, t_fractal *fractal);
+void	screen_to_world(t_screen_point *s_point, t_world_point *w_point,
+			t_screen screen);
+void	world_to_screen(t_screen_point *s_point, t_world_point *w_point,
+			t_screen screen);
+int		get_fractal_color(int iteration, int max_iterations);
+int		destroy_window(t_fractal *fractal);
 
 #endif

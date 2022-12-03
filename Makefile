@@ -5,7 +5,9 @@ SRCS_PATH =./
 OBJS_PATH = ./
 
 SRCS_NAME = screen_helpers.c \
-			fractal.c
+			fractal.c \
+			hooks.c \
+			color_helpers.c
 
 
 SRCS = $(addprefix $(SRCS_PATH)/,$(SRCS_NAME))

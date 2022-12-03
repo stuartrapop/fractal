@@ -6,39 +6,51 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:44:06 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/01 18:01:05 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:21:29 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractal.h"
-#include "keycode.h"
+#include "constants.h"
+
+int	fractal_put(t_world_point w_point, t_screen screen)
+{
+	int		iterations;
+	double	z_x;
+	double	z_y;
+	double	cx;
+	double	cy;
+	double	temp;
+
+	iterations = 1;
+	cx = w_point.x / screen.width * 5 - 0.12375;
+	cy = w_point.y / screen.height * 5 + 0.56508;
+	z_x = 0;
+	z_y = 0;
+
+	if (w_point.x < -screen.width / 2 || w_point.x > screen.width / 2 || \
+		w_point.y < -screen.height / 2 || w_point.y > screen.height / 2)
+		return (0x000000);
+	while ((z_x * z_x + z_y * z_y) < 4 && iterations <= 400)
+	{
+		temp = z_x * z_x - z_y * z_y + cx;
+		z_y = -2 * z_x * z_y + cy;
+		z_x = temp;
+		iterations++;
+	}
+	if ((z_x * z_x + z_y * z_y) < 4)
+		return (0xFF0000);
+	else
+		return (get_fractal_color(iterations, 400));
+}
 
 int	get_square(t_world_point w_point, int color)
 {
-	if ((w_point.x < 200) && (w_point.y < 200) && \
-		(w_point.x > 0) && (w_point.y > 0))
+	if ((w_point.x < 100) && (w_point.y < 100) && \
+		(w_point.x > -100) && (w_point.y > -100))
 		return (color);
 	else
 		return (0xFFFFFF);
-}
-
-void	screen_to_world(t_screen_point *s_point, t_world_point *w_point, \
-	t_screen screen)
-{
-	int	x;
-	int	y;
-
-	x = s_point->x + (s_point->x - screen.width / 2) * (1 - screen.scale);
-	y = s_point->y + (s_point->y - screen.height / 2) * (1 - screen.scale);
-	w_point->x = (double)(x + screen.x_offset);
-	w_point->y = (double)(y + screen.y_offset);
-}
-
-void	world_to_screen(t_screen_point *s_point, t_world_point *w_point, \
-	t_screen screen)
-{
-	s_point->x = (int)(w_point->x - screen.x_offset);
-	s_point->y = (int)(w_point->y - screen.y_offset);
 }
 
 void	my_mlx_draw_screen(t_data *data, t_screen screen)
@@ -54,56 +66,13 @@ void	my_mlx_draw_screen(t_data *data, t_screen screen)
 		while (s_point.y < screen.height)
 		{
 			screen_to_world(&s_point, &w_point, screen);
-			color = get_square(w_point, 0xFF0000);
+			// color = get_square(w_point, 0xFF0000);
+			color = fractal_put(w_point, screen);
 			my_mlx_pixel_put(data, s_point.x, s_point.y, color);
 			s_point.y++;
 		}
 		s_point.x++;
 	}
-}
-
-int	key_hook(int keycode, t_fractal *fractal)
-{
-	if (keycode == ESCAPE)
-		printf("upkey pressed\n");
-	if (keycode == UPKEY)
-		fractal->screen.y_offset += 50;
-	if (keycode == DOWNKEY)
-		fractal->screen.y_offset -= 50;
-	if (keycode == RIGHTKEY)
-		fractal->screen.x_offset -= 50;
-	if (keycode == LEFTKEY)
-		fractal->screen.x_offset += 50;
-	if (keycode == PLUS)
-		fractal->screen.scale *= 1.1;
-	if (keycode == MINUS)
-		fractal->screen.scale *= 0.9;
-	
-	printf("key pressed %d\n", keycode);
-	printf("scale %f\n", fractal->screen.scale);
-	printf("offset %f %f\n", fractal->screen.x_offset, fractal->screen.y_offset);
-	return (0);
-}
-
-int	mouse_hook(int button, int x, int y, t_fractal *fractal)
-{
-	if (button == LEFTCLICK || button == SCROLL_IN)
-	{
-		fractal->screen.scale *= 1.1;
-		fractal->screen.x_offset = fractal->screen.x_offset - ( fractal->screen.width / 2 - x) * (0.9 - 1);
-		fractal->screen.y_offset = fractal->screen.y_offset - ( fractal->screen.height / 2 - y) * (0.9 - 1);
-
-	}
-	if (button == RIGHTCLICK || button == SCROLL_OUT)
-	{
-		fractal->screen.scale *= 0.9;
-		fractal->screen.x_offset = fractal->screen.x_offset - ( fractal->screen.width / 2 - x) * (1.1 - 1);
-		fractal->screen.y_offset = fractal->screen.y_offset - ( fractal->screen.height / 2 - y) * (1.1 - 1);
-	}
-	fractal->screen.mouse_x = x;
-	fractal->screen.mouse_y = y;
-	printf("mouse pressed %d %d  %d %f\n", button, x, y, fractal->screen.x_offset);
-	return (0);
 }
 
 int	render(t_fractal *fractal)
@@ -114,14 +83,28 @@ int	render(t_fractal *fractal)
 	return (1);
 }
 
+int	destroy_window(t_fractal *fractal)
+{
+	fractal->screen.width = 800;
+	mlx_destroy_image(fractal->mlx, fractal->img.img);
+	mlx_destroy_window(fractal->mlx, fractal->mlx_win);
+
+
+	exit(0);
+}
+
 int	main(void)
 {
 	t_fractal	fractal;
 
+	get_fractal_color(1750, 3000);
 	initialize(&fractal);
 	mlx_loop_hook(fractal.mlx, &render, &fractal);
+	mlx_hook(fractal.mlx_win, ON_MOUSEDOWN, 0, &mouse_down, &fractal);
+	mlx_hook(fractal.mlx_win, ON_MOUSEUP, 0, &mouse_up, &fractal);
+	mlx_hook(fractal.mlx_win, ON_MOUSEMOVE, 0, &mouse_move, &fractal);
+	mlx_hook(fractal.mlx_win, 17, 0, &destroy_window, &fractal);
 	mlx_key_hook (fractal.mlx_win, &key_hook, &fractal);
-	mlx_mouse_hook (fractal.mlx_win, &mouse_hook, &fractal);
 	mlx_loop(fractal.mlx);
 	return (0);
 }
