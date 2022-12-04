@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:23:17 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/03 10:04:53 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/04 09:52:50 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ typedef struct s_fractal {
 	void		*mlx_win;
 	t_screen	screen;
 	t_data		img;
+	int			iter;
+	double		z_x;
+	double		z_y;
+	double		cx;
+	double		cy;
 }	t_fractal;
 
 typedef struct s_rgb {
