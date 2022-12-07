@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:44:06 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/07 14:50:28 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:14:34 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ void	display_options(void)
 	ft_putstr("\n\nRun program with one of the following options:\n");
 	ft_putstr("./fractol Mandelbrot\n");
 	ft_putstr("./fractol Julia\n");
-	ft_putstr("./fractol BurningShip\n");
+	ft_putstr("./fractol BurningShip\n\n");
+	ft_putstr("Drag with left button on mouse to move\n");
+	ft_putstr("Or use arrow keys to move up/down right/left\n");
+	ft_putstr("Shift colors with right button on mouse\n");
+	ft_putstr("Zoom in and out with +/- or mouse scroll\n");
 	exit(0);
 }
 
