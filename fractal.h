@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:23:17 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/07 10:37:16 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:53:04 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ typedef struct s_data {
 }				t_data;
 
 typedef struct s_screen {
-	int			width;
-	int			height;
-	char		*name;
-	double		x_offset;
-	double		y_offset;
-	int			pan_start_x;
-	int			pan_start_y;
-	int			mouse_x;
-	int			mouse_y;
-	int			mouse_down;
-	double		scale;
+	int				width;
+	int				height;
+	char			*name;
+	double			x_offset;
+	double			y_offset;
+	int				pan_start_x;
+	int				pan_start_y;
+	t_screen_point	mouse;
+	int				mouse_y;
+	int				mouse_down;
+	double			scale;
 }	t_screen;
 
 typedef struct s_fractal {
@@ -60,7 +60,9 @@ typedef struct s_fractal {
 	double		z_y;
 	double		cx;
 	double		cy;
-	char		kind[50];
+	int			color_shift;
+	int			(*fun_ptr)(t_world_point w_point, struct s_fractal *fra);
+
 }	t_fractal;
 
 typedef struct s_rgb {
@@ -82,7 +84,13 @@ void	screen_to_world(t_screen_point *s_point, t_world_point *w_point,
 			t_screen screen);
 void	world_to_screen(t_screen_point *s_point, t_world_point *w_point,
 			t_screen screen);
-int		get_fractal_color(int iteration, int max_iterations);
+int		get_fractal_color(int iteration, int max_iterations, t_fractal *fra);
 int		destroy_window(t_fractal *fractal);
+int		mandelbrot(t_world_point w_point, t_fractal *fra);
+int		julia(t_world_point w_point, t_fractal *fra);
+int		burningship(t_world_point w_point, t_fractal *fra);
+void	shift_colors(t_fractal *fractal);
+void	ft_putstr(char *str);
+int		ft_strcmp(char *s1, char *s2);
 
 #endif

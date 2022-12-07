@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:44:48 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/07 10:23:11 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:50:55 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <mlx.h>
+#include <unistd.h>
 
 void	int_to_rgb(int color, t_rgb *rgb)
 {
@@ -25,14 +26,31 @@ void	int_to_rgb(int color, t_rgb *rgb)
 	rgb->r = color % 256;
 }
 
-int	get_fractal_color(int iteration, int max_iterations)
+int	get_fractal_color(int iteration, int max_iterations, t_fractal *fractal)
 {
 	t_rgb	s;
 
 	if (iteration == max_iterations)
 		return (0x00000);
-	s.r = sin(0.3 * (double)iteration);
-	s.g = sin(0.3 * (double)iteration + 3) * 127 + 128;
-	s.b = sin(0.3 * (double)iteration + 3) * 127 + 128;
+	if (fractal->color_shift)
+	{
+	s.r = 0;
+	s.g = (int)(sin(0.3 * (double)iteration + 3) * 127) + (int)128;
+	s.b = 0;
+	}
+	else
+	{
+	s.r = 0;
+	s.g = (int)(sin(0.3 * (double)iteration + 3) * 127) + (int)128;
+	s.b = (int)(sin(0.3 * (double)iteration + 3) * 127) + (int)128;
+	}
 	return (s.r << 16 | s.g << 8 | s.b);
+}
+
+void	shift_colors(t_fractal *fractal)
+{
+	if (fractal->color_shift == 0)
+		fractal->color_shift = 1;
+	else if (fractal->color_shift == 1)
+		fractal->color_shift = 0;
 }

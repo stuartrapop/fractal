@@ -1,9 +1,0 @@
-{
-  "files.associations": {
-    "*.ejs": "plaintext",
-    "mlx.h": "c",
-    "cmath": "c",
-    "ios": "c",
-    "stdlib.h": "c"
-  }
-}

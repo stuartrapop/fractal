@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:33:29 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/07 10:37:20 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:56:54 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	initialize(t_fractal *fractal)
 	fractal->screen.y_offset = -SCREEN_HEIGHT / 2;
 	fractal->screen.pan_start_x = 0;
 	fractal->screen.pan_start_y = 0;
-	fractal->screen.mouse_x = 0;
-	fractal->screen.mouse_y = 0;
+	fractal->screen.mouse.x = 0;
+	fractal->screen.mouse.y = 0;
+	fractal->color_shift = 0;
 	fractal->screen.mouse_down = 0;
 	fractal->screen.scale = 1;
 	fractal->mlx = mlx_init();

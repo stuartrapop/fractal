@@ -6,17 +6,12 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:26:15 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/07 10:11:31 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:57:34 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYCODE_H
-# define KEYCODE_H
-
-# include <stdlib.h>
-# include "mlx.h"
-# include <stdio.h>
-# include <math.h>
+#ifndef CONSTANTS_H
+# define CONSTANTS_H
 
 # define UPKEY  126
 # define DOWNKEY  125
@@ -39,18 +34,11 @@ typedef enum e_events {
 	ON_MOUSEMOVE = 6,
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
-} t_events;
+}	t_events;
 
 # define SCREEN_WIDTH  800
 # define SCREEN_HEIGHT  600
 # define SCREEN_NAME  "Fractal Display"
-# define MAX_ITER 60
-
-# define Color1 0x003f5c
-# define Color2 0x444e86
-# define Color3 0x955196
-# define Color4 0xdd5182
-# define Color5 0xff6e54
-# define Color6 0xffa600
+# define MAX_ITER 200
 
 #endif
