@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:23:17 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/04 09:52:50 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/07 10:37:16 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_fractal {
 	double		z_y;
 	double		cx;
 	double		cy;
+	char		kind[50];
 }	t_fractal;
 
 typedef struct s_rgb {
@@ -68,9 +69,8 @@ typedef struct s_rgb {
 	int	b;
 }	t_rgb;
 
-void
-initialize(t_fractal *fractal);
-int		round_int(double d);
+void	initialize(t_fractal *fractal);
+int		destroy_window(t_fractal *fractal);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		key_hook(int keycode, t_fractal *fractal);
 void	update_offset(t_screen_point s_point, t_world_point w_point,

@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:26:15 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/02 12:40:07 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/07 10:11:31 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef enum e_events {
 # define SCREEN_WIDTH  800
 # define SCREEN_HEIGHT  600
 # define SCREEN_NAME  "Fractal Display"
+# define MAX_ITER 60
 
 # define Color1 0x003f5c
 # define Color2 0x444e86

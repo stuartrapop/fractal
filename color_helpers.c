@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:44:48 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/02 13:44:16 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/07 10:23:11 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	int_to_rgb(int color, t_rgb *rgb)
 	color /= 256;
 	rgb->r = color % 256;
 }
-
 
 int	get_fractal_color(int iteration, int max_iterations)
 {

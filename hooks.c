@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:36:32 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/03 10:05:13 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/07 10:34:15 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,15 @@ int	mouse_down(int button, int x, int y, t_fractal *fractal)
 		fractal->screen.mouse_down = 1;
 		fractal->screen.pan_start_x = x;
 		fractal->screen.pan_start_y = y;
+		return (0);
 	}
 	if (button == SCROLL_IN)
-	{
 		fractal->screen.scale *= 1.1;
-		screen_to_world(&s_point, &w_point2, fractal->screen);
-		fractal->screen.x_offset -= (w_point2.x - w_point1.x);
-		fractal->screen.y_offset -= (w_point2.y - w_point1.y);
-	}
-	if (button == SCROLL_OUT)
-	{
-		if (fractal->screen.scale < 0.3)
-			return (0);
+	if (button == SCROLL_OUT && fractal->screen.scale >= 0.3)
 		fractal->screen.scale *= 0.9;
-		screen_to_world(&s_point, &w_point2, fractal->screen);
-		fractal->screen.x_offset -= (w_point2.x - w_point1.x);
-		fractal->screen.y_offset -= (w_point2.y - w_point1.y);
-	}
-
-	printf("scale %f\n", fractal->screen.scale);
+	screen_to_world(&s_point, &w_point2, fractal->screen);
+	fractal->screen.x_offset -= (w_point2.x - w_point1.x);
+	fractal->screen.y_offset -= (w_point2.y - w_point1.y);
 	return (0);
 }
 

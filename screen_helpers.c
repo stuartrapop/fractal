@@ -6,7 +6,7 @@
 /*   By: srapopor <srapopor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:33:29 by srapopor          #+#    #+#             */
-/*   Updated: 2022/12/02 11:55:05 by srapopor         ###   ########.fr       */
+/*   Updated: 2022/12/07 10:37:20 by srapopor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	initialize(t_fractal *fractal)
 		&fractal->img.endian);
 }
 
-int	round_int(double d)
+int	destroy_window(t_fractal *fractal)
 {
-	int	rounded_value;
-
-	rounded_value = (int)(d + 0.01);
-	return (rounded_value);
+	fractal->screen.width = 800;
+	mlx_destroy_image(fractal->mlx, fractal->img.img);
+	mlx_destroy_window(fractal->mlx, fractal->mlx_win);
+	exit(0);
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
